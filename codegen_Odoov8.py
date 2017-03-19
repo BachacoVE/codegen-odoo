@@ -303,14 +303,14 @@ class OpenERPRenderer(ObjRenderer) :
 
     def view_get(self):
         result = """<?xml version="1.0"?>
-<openerp>
+<odoo>
 <data>
 """
         for sk in self.klass_names:
             result += self.view_class_get(sk, self.klasses[sk])
         result += """
 </data>
-</openerp>"""
+</odoo>"""
         return result
 
 
@@ -410,7 +410,7 @@ from openerp import api, fields, models
         zip = zipfile.ZipFile(self.filename, 'w')
         filewrite = {
                 '__init__.py':self.init_get(),
-                '__openerp__.py':self.terp_get(),
+                '__manifest__.py':self.terp_get(),
                 'models/__init__.py':self.init_model_get(),
                 'models/'+module+'.py': self.code_get(),
                 'views/'+module+'_view.xml': self.view_get(),
